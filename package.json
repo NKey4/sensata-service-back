@@ -1,7 +1,6 @@
 {
-  "name": "sensata-back",
+  "name": "sensata-service-back",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js"
@@ -16,5 +15,14 @@
     "mongoose": "^8.2.1",
     "nodemailer": "^6.9.12",
     "nodemon": "^3.1.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NKey4/Sensata-Service-Back.git"
+  },
+  "bugs": {
+    "url": "https://github.com/NKey4/Sensata-Service-Back/issues"
+  },
+  "homepage": "https://github.com/NKey4/Sensata-Service-Back#readme",
+  "description": ""
 }
