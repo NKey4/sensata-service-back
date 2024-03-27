@@ -1,7 +1,7 @@
-const ApplicationModel = require("../Models/Application");
-const CounterModel = require("../Models/Counter");
+import ApplicationModel from "../Models/Application.js";
+import CounterModel from "../Models/Counter.js";
 
-module.exports.create = async (req, res) => {
+const create = async (req, res) => {
   try {
     let counter = await CounterModel.findOneAndUpdate(
       { id: "autoval" },
@@ -39,7 +39,7 @@ module.exports.create = async (req, res) => {
   }
 };
 
-module.exports.getAll = async (req, res) => {
+const getAll = async (req, res) => {
   try {
     const applications = await ApplicationModel.find({ user: req.userId })
       .populate("user")
@@ -53,7 +53,7 @@ module.exports.getAll = async (req, res) => {
   }
 };
 
-module.exports.remove = async (req, res) => {
+const remove = async (req, res) => {
   try {
     const postId = req.params.id;
     const deletedPost = await ApplicationModel.findByIdAndDelete(postId);
@@ -69,7 +69,7 @@ module.exports.remove = async (req, res) => {
   }
 };
 
-module.exports.update = async (req, res) => {
+const update = async (req, res) => {
   try {
     const postId = req.params.id;
 
@@ -94,3 +94,11 @@ module.exports.update = async (req, res) => {
     });
   }
 };
+const ApplicationController = {
+  create,
+  getAll,
+  remove,
+  update,
+};
+
+export default ApplicationController;

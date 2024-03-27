@@ -1,11 +1,11 @@
-const { body } = require("express-validator");
+import { body } from "express-validator";
 
-module.exports.loginValidation = [
+export const loginValidation = [
   body("email", "Неверный формат почты").isEmail(),
   body("verificationCode", "Неверный формат кода").isLength({ min: 4 }),
 ];
 
-module.exports.registerValidation = [
+export const registerValidation = [
   body("email", "Неверный формат почты").isEmail(),
   body("fullName", "Укажите имя").optional().isLength({ min: 3 }),
   body("phoneNumber", "Укажите номер телефона")
@@ -13,7 +13,7 @@ module.exports.registerValidation = [
     .isLength({ min: 11 }),
 ];
 
-module.exports.postCreateValidation = [
+export const applicationCreateValidation = [
   body("companyName", "Введите название компании")
     .isLength({ min: 3 })
     .isString(),

@@ -1,6 +1,6 @@
-const jwt = require("jsonwebtoken");
-const nodemailer = require("nodemailer");
-const UserModel = require("../Models/User");
+import jwt from "jsonwebtoken";
+import nodemailer from "nodemailer";
+import UserModel from "../Models/User.js";
 
 const transporter = nodemailer.createTransport({
   host: "smtp.yandex.kz",
@@ -12,7 +12,7 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-module.exports.sendCode = async (req, res) => {
+const sendCode = async (req, res) => {
   try {
     const { fullName, email, phoneNumber } = req.body;
     const confirmationCode = Math.floor(Math.random() * 10000);
@@ -47,7 +47,7 @@ module.exports.sendCode = async (req, res) => {
   }
 };
 
-module.exports.checkCode = async (req, res) => {
+const checkCode = async (req, res) => {
   try {
     const { email, verificationCode } = req.body;
 
@@ -82,7 +82,7 @@ module.exports.checkCode = async (req, res) => {
   }
 };
 
-module.exports.sendAliceCode = async (req, res) => {
+const sendAliceCode = async (req, res) => {
   try {
     const { userId } = req;
     const confirmationCode = Math.floor(Math.random() * 10000);
@@ -98,7 +98,7 @@ module.exports.sendAliceCode = async (req, res) => {
   }
 };
 
-module.exports.confirmAliceCode = async (req, res) => {
+const confirmAliceCode = async (req, res) => {
   try {
     const { yandexId, phoneNumber, code } = req.body;
 
@@ -123,7 +123,7 @@ module.exports.confirmAliceCode = async (req, res) => {
   }
 };
 
-module.exports.getMe = async (req, res) => {
+const getMe = async (req, res) => {
   try {
     const user = await UserModel.findById(req.userId);
     if (!user) {
@@ -143,7 +143,7 @@ module.exports.getMe = async (req, res) => {
   }
 };
 
-module.exports.addAddress = async (req, res) => {
+const addAddress = async (req, res) => {
   try {
     const address = req.body.address;
     console.log(address);
@@ -163,3 +163,14 @@ module.exports.addAddress = async (req, res) => {
     });
   }
 };
+
+const UserController = {
+  sendCode,
+  checkCode,
+  sendAliceCode,
+  confirmAliceCode,
+  getMe,
+  addAddress,
+};
+
+export default UserController;

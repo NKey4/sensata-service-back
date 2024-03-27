@@ -1,14 +1,19 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const cors = require("cors");
-const {
+import express from "express";
+import mongoose from "mongoose";
+import cors from "cors";
+import {
   registerValidation,
   loginValidation,
-  postCreateValidation,
-} = require("./validations");
-const { check, handleValidationErrors } = require("./utils/index");
-
-const { UserController, PostController } = require("./controllers/index");
+  applicationCreateValidation,
+} from "./validations.js";
+import {
+  checkAuth,
+  checkAccess,
+  handleValidationErrors,
+} from "./utils/index.js";
+import { UserController, ApplicationController } from "./controllers/index.js";
+import dotenv from "dotenv";
+dotenv.config();
 
 mongoose.connect(process.env.MONGODB_URI).then(() => {
   console.log("Mongoose success");
@@ -32,29 +37,29 @@ app.post(
   handleValidationErrors,
   UserController.checkCode
 );
-app.get("/auth/me", check.checkAuth, UserController.getMe);
-app.get("/alice/sendCode", check.checkAuth, UserController.sendAliceCode);
+app.get("/auth/me", checkAuth, UserController.getMe);
+app.get("/alice/sendCode", checkAuth, UserController.sendAliceCode);
 app.post("/alice/confirmCode", UserController.confirmAliceCode);
 
-app.post("/add-address", check.checkAuth, UserController.addAddress);
-app.get("/applications", check.checkAuth, PostController.getAll);
+app.post("/add-address", checkAuth, UserController.addAddress);
+app.get("/applications", checkAuth, ApplicationController.getAll);
 app.post(
   "/applications",
-  check.checkAuth,
+  checkAuth,
   handleValidationErrors,
-  PostController.create
+  ApplicationController.create
 );
 app.delete(
   "/applications/:id",
-  check.checkAuth,
-  check.checkAccess,
-  PostController.remove
+  checkAuth,
+  checkAccess,
+  ApplicationController.remove
 );
 app.patch(
   "/applications/:id",
-  check.checkAuth,
-  check.checkAccess,
-  postCreateValidation,
+  checkAuth,
+  checkAccess,
+  applicationCreateValidation,
   handleValidationErrors,
-  PostController.update
+  ApplicationController.update
 );

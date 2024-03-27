@@ -1,3 +1,2 @@
-const UserController = require("./UserController.js");
-const PostController = require("./ApplicationController.js");
-module.exports = { UserController, PostController };
+export { default as UserController } from "./UserController.js";
+export { default as ApplicationController } from "./ApplicationController.js";

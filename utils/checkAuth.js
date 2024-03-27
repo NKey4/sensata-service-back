@@ -1,7 +1,7 @@
-const jwt = require("jsonwebtoken");
-const PostModel = require("../Models/Application");
+import jwt from "jsonwebtoken";
+import applicationModel from "../Models/Application.js";
 
-module.exports.checkAuth = (req, res, next) => {
+export const checkAuth = (req, res, next) => {
   const token = (req.headers.authorization || "").replace(/Bearer\s?/, "");
   if (token) {
     try {
@@ -21,19 +21,19 @@ module.exports.checkAuth = (req, res, next) => {
   }
 };
 
-module.exports.checkAccess = async (req, res, next) => {
+export const checkAccess = async (req, res, next) => {
   const token = (req.headers.authorization || "").replace(/Bearer\s?/, "");
   const userId = jwt.decode(token)._id;
-  const postId = req.params.id;
+  const applicationId = req.params.id;
 
   try {
-    const post = await PostModel.findById(postId);
-    if (!post) {
+    const application = await applicationModel.findById(applicationId);
+    if (!application) {
       return res.status(404).json({
         message: "Активность не найдена",
       });
     }
-    if (post.user.toString() !== userId) {
+    if (application.user.toString() !== userId) {
       return res.status(403).json({
         message: "Нет доступа",
       });

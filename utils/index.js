@@ -1,7 +1,2 @@
-const check = require("./checkAuth");
-const handleValidationErrors = require("./handleValidationErrors");
-
-module.exports = {
-  check,
-  handleValidationErrors,
-};
+export { checkAuth, checkAccess } from "./checkAuth.js";
+export { default as handleValidationErrors } from "./handleValidationErrors.js";
