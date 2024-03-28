@@ -28,11 +28,7 @@ const ApplicationSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
-    yandexAddress: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Address",
-      required: true,
-    },
+    address: { type: Schema.Types.ObjectId, ref: "Address" },
     dataMessage: String,
     description: String,
     userMessage: String,

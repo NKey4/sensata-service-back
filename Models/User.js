@@ -1,10 +1,5 @@
 import mongoose from "mongoose";
 
-const AddressSchema = new mongoose.Schema({
-  street: { type: String, required: true },
-  city: { type: String, required: true },
-});
-
 const UserSchema = new mongoose.Schema(
   {
     fullName: {
@@ -24,7 +19,7 @@ const UserSchema = new mongoose.Schema(
     confirmationCode: String,
     aliceCode: String,
     yandexId: String,
-    address: [AddressSchema],
+    addresses: [{ type: Schema.Types.ObjectId, ref: "Address" }],
     entryDate: Date,
   },
   {
