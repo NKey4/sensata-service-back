@@ -101,7 +101,6 @@ const sendAliceCode = async (req, res) => {
 const confirmAliceCode = async (req, res) => {
   try {
     const { yandexId, phoneNumber, code } = req.body;
-
     const user = await UserModel.findOne({ phoneNumber });
     if (!user) {
       return res.status(404).json({ message: "Пользователь не найден" });
@@ -146,6 +145,7 @@ const getMe = async (req, res) => {
 const addAddress = async (req, res) => {
   try {
     const address = req.body.address;
+    const city = req.body.city;
     console.log(address);
     const user = await UserModel.findById(req.userId);
     if (!user) {
@@ -153,7 +153,7 @@ const addAddress = async (req, res) => {
         message: "Пользователь не найден",
       });
     }
-    user.address.push(address);
+    user.address.push({ address, city });
     const updatedUser = await user.save();
     res.json(updatedUser);
   } catch (err) {
