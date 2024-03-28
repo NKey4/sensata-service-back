@@ -158,7 +158,7 @@ const addAddress = async (req, res) => {
 
     user.addresses.push(savedAddress._id);
     const updatedUser = await user.save();
-
+    console.log(updatedUser);
     res.json(updatedUser);
   } catch (err) {
     console.log(err);
