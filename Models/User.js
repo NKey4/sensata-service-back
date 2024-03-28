@@ -19,7 +19,7 @@ const UserSchema = new mongoose.Schema(
     confirmationCode: String,
     aliceCode: String,
     yandexId: String,
-    addresses: [{ type: Schema.Types.ObjectId, ref: "Address" }],
+    addresses: [{ type: mongoose.Schema.Types.ObjectId, ref: "Address" }],
     entryDate: Date,
   },
   {
