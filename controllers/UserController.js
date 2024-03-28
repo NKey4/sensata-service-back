@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
 import nodemailer from "nodemailer";
 import UserModel from "../Models/User.js";
+import AddressModel from "../Models/Address.js";
 
 const transporter = nodemailer.createTransport({
   host: "smtp.yandex.kz",
@@ -144,9 +145,7 @@ const getMe = async (req, res) => {
 
 const addAddress = async (req, res) => {
   try {
-    console.log(req.body);
-    const street = req.body.street;
-    const city = req.body.city;
+    const { street, city } = req.body;
     const user = await UserModel.findById(req.userId);
     console.log(user);
     if (!user) {
@@ -154,8 +153,12 @@ const addAddress = async (req, res) => {
         message: "Пользователь не найден",
       });
     }
-    user.address.push({ street, city });
+    const newAddress = new AddressModel({ street, city });
+    const savedAddress = await newAddress.save();
+
+    user.addresses.push(savedAddress._id);
     const updatedUser = await user.save();
+
     res.json(updatedUser);
   } catch (err) {
     console.log(err);
