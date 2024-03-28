@@ -146,7 +146,7 @@ const getMe = async (req, res) => {
 const addAddress = async (req, res) => {
   try {
     const { street, city } = req.body;
-    const user = await UserModel.findById(req.userId);
+    const user = await UserModel.findById(req.userId).populate("addresses");
     console.log(user);
     if (!user) {
       return res.status(404).json({
