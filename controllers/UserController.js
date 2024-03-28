@@ -125,7 +125,7 @@ const confirmAliceCode = async (req, res) => {
 
 const getMe = async (req, res) => {
   try {
-    const user = await UserModel.findById(req.userId);
+    const user = await UserModel.findById(req.userId).populate("addresses");
     if (!user) {
       return res.status(404).json({
         message: "ПОльзователь не найден",
