@@ -28,7 +28,7 @@ const ApplicationSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
-    address: { type: Schema.Types.ObjectId, ref: "Address" },
+    address: { type: mongoose.Schema.Types.ObjectId, ref: "Address" },
     dataMessage: String,
     description: String,
     userMessage: String,
