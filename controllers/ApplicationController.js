@@ -20,7 +20,7 @@ const create = async (req, res) => {
 
     const doc = new ApplicationModel({
       id: seqId,
-      yandexAddress: req.body.address,
+      yandexAddress: req.body.address_id,
       location: req.body.location,
       workType: req.body.workType,
       reason: req.body.reason,

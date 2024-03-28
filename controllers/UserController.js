@@ -144,16 +144,17 @@ const getMe = async (req, res) => {
 
 const addAddress = async (req, res) => {
   try {
-    const address = req.body.address;
+    console.log(req.body);
+    const street = req.body.street;
     const city = req.body.city;
-    console.log(address);
     const user = await UserModel.findById(req.userId);
+    console.log(user);
     if (!user) {
       return res.status(404).json({
         message: "Пользователь не найден",
       });
     }
-    user.address.push({ address, city });
+    user.address.push({ street, city });
     const updatedUser = await user.save();
     res.json(updatedUser);
   } catch (err) {
