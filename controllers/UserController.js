@@ -147,7 +147,6 @@ const addAddress = async (req, res) => {
   try {
     const { street, city } = req.body;
     const user = await UserModel.findById(req.userId).populate("addresses");
-    console.log(user);
     if (!user) {
       return res.status(404).json({
         message: "Пользователь не найден",
@@ -157,7 +156,10 @@ const addAddress = async (req, res) => {
     const savedAddress = await newAddress.save();
 
     user.addresses.push(savedAddress._id);
-    const updatedUser = await user.save();
+    await user.save();
+    const updatedUser = await UserModel.findById(req.userId).populate(
+      "addresses"
+    );
     console.log(updatedUser);
     res.json(updatedUser);
   } catch (err) {
