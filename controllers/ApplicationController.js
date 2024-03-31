@@ -20,13 +20,14 @@ const create = async (req, res) => {
 
     const doc = new ApplicationModel({
       id: seqId,
-      yandexAddress: req.body.address_id,
-      location: req.body.location,
-      workType: req.body.workType,
-      reason: req.body.reason,
-      description: req.body.description,
       user: req.userId,
+      requestLocationId: req.body.location,
+      requestCategoryId: req.body.workType,
+      requestSubCategoryId: req.body.reason,
+      status_id: "660087e06c58241f9b026704",
+      address: req.body.address_id,
       dataMessage: req.body.dataMessage,
+      userMessage: req.body.description,
     });
 
     const application = await doc.save();

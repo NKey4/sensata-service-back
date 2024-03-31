@@ -18,7 +18,7 @@ const UserSchema = new mongoose.Schema(
     },
     confirmationCode: String,
     aliceCode: String,
-    yandexId: String,
+    yandex_id: String,
     addresses: [{ type: mongoose.Schema.Types.ObjectId, ref: "Address" }],
     entryDate: Date,
   },
