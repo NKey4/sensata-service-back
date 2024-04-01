@@ -1,5 +1,5 @@
-import ApplicationModel from "../Models/Application.js";
-import CounterModel from "../Models/Counter.js";
+import ApplicationModel from "../models/Application.js";
+import CounterModel from "../models/Counter.js";
 
 const create = async (req, res) => {
   try {
@@ -44,7 +44,13 @@ const getAll = async (req, res) => {
   try {
     const applications = await ApplicationModel.find({ user: req.userId })
       .populate("user")
+      .populate("requestLocationId")
+      .populate("requestCategoryId")
+      .populate("requestSubCategoryId")
+      .populate("status_id")
+      .populate("address")
       .exec();
+    console.log(applications);
     res.json(applications);
   } catch (error) {
     console.log(error);

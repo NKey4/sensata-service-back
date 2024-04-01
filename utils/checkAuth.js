@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import applicationModel from "../Models/Application.js";
+import ApplicationModel from "../models/Application.js";
 
 export const checkAuth = (req, res, next) => {
   const token = (req.headers.authorization || "").replace(/Bearer\s?/, "");
@@ -27,7 +27,7 @@ export const checkAccess = async (req, res, next) => {
   const applicationId = req.params.id;
 
   try {
-    const application = await applicationModel.findById(applicationId);
+    const application = await ApplicationModel.findById(applicationId);
     if (!application) {
       return res.status(404).json({
         message: "Активность не найдена",

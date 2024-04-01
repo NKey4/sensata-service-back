@@ -11,7 +11,11 @@ import {
   checkAccess,
   handleValidationErrors,
 } from "./utils/index.js";
-import { UserController, ApplicationController } from "./controllers/index.js";
+import {
+  UserController,
+  ApplicationController,
+  AddressControler,
+} from "./controllers/index.js";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -41,7 +45,10 @@ app.get("/auth/me", checkAuth, UserController.getMe);
 app.get("/alice/sendCode", checkAuth, UserController.sendAliceCode);
 app.post("/alice/confirmCode", UserController.confirmAliceCode);
 
-app.post("/add-address", checkAuth, UserController.addAddress);
+app.post("/add-address", checkAuth, AddressControler.addAddress);
+app.get("/addresses", checkAuth, AddressControler.getAll);
+app.get("/appeals", checkAuth, AddressControler.getAll);
+
 app.get("/applications", checkAuth, ApplicationController.getAll);
 app.post(
   "/applications",
