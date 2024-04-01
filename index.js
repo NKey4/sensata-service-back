@@ -15,6 +15,7 @@ import {
   UserController,
   ApplicationController,
   AddressControler,
+  AppealController,
 } from "./controllers/index.js";
 import dotenv from "dotenv";
 dotenv.config();
@@ -47,7 +48,7 @@ app.post("/alice/confirmCode", UserController.confirmAliceCode);
 
 app.post("/add-address", checkAuth, AddressControler.addAddress);
 app.get("/addresses", checkAuth, AddressControler.getAll);
-app.get("/appeals", checkAuth, AddressControler.getAll);
+app.get("/appeals", checkAuth, AppealController.getAll);
 
 app.get("/applications", checkAuth, ApplicationController.getAll);
 app.post(

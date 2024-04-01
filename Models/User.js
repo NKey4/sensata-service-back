@@ -23,10 +23,8 @@ const UserSchema = new mongoose.Schema(
     entryDate: Date,
   },
   {
-    timestamps: true,
-  },
-  {
     versionKey: false,
+    timestamps: true,
   }
 );
 

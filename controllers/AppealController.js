@@ -2,7 +2,7 @@ import AppealModel from "../models/Appeal.js";
 
 const getAll = async (req, res) => {
   try {
-    const appeals = await AppealModel.find({ user: req.userId });
+    const appeals = await AppealModel.find({ user: req.userId }).populate("");
     res.json(appeals);
   } catch (error) {
     console.log(error);
