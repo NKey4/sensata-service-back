@@ -5,7 +5,7 @@ const addAddress = async (req, res) => {
     const { street, city } = req.body;
     const newAddress = new AddressModel({ street, city, user: req.userId });
     await newAddress.save();
-    const addresses = await AddressModel.find({ user });
+    const addresses = await AddressModel.find({ user: req.userId });
     res.json(addresses);
   } catch (err) {
     console.log(err);
