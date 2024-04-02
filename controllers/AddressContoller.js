@@ -5,6 +5,11 @@ const addAddress = async (req, res) => {
     const { street, city } = req.body;
     const newAddress = new AddressModel({ street, city, user: req.userId });
     await newAddress.save();
+
+    await UserModel.findByIdAndUpdate(req.userId, {
+      $push: { addresses: newAddress._id },
+    });
+
     const addresses = await AddressModel.find({ user: req.userId });
     res.json(addresses);
   } catch (err) {
