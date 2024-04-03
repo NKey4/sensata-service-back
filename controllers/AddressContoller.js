@@ -1,4 +1,5 @@
 import AddressModel from "../models/Address.js";
+import UserModel from "../models/User.js";
 
 const addAddress = async (req, res) => {
   try {
@@ -9,9 +10,7 @@ const addAddress = async (req, res) => {
     await UserModel.findByIdAndUpdate(req.userId, {
       $push: { addresses: newAddress._id },
     });
-
-    const addresses = await AddressModel.find({ user: req.userId });
-    res.json(addresses);
+    res.json(newAddress);
   } catch (err) {
     console.log(err);
     res.status(500).json({
