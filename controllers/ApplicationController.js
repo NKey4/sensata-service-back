@@ -1,3 +1,5 @@
+import CategoryModel from "../models/Category.js";
+import LocationModel from "../models/Location.js";
 import ApplicationModel from "../models/Application.js";
 import CounterModel from "../models/Counter.js";
 
@@ -36,6 +38,20 @@ const create = async (req, res) => {
     console.log(error);
     res.status(500).json({
       message: "Не удалось создать активность",
+    });
+  }
+};
+
+const getOptions = async (req, res) => {
+  try {
+    const categories = CategoryModel.find();
+    const locations = LocationModel.find();
+
+    res.json({ categories, locations });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      message: "Ошибка в получении всех активностей",
     });
   }
 };
@@ -103,6 +119,7 @@ const update = async (req, res) => {
 };
 const ApplicationController = {
   create,
+  getOptions,
   getAll,
   remove,
   update,

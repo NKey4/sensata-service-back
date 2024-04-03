@@ -51,8 +51,10 @@ app.get("/addresses", checkAuth, AddressControler.getAll);
 app.get("/appeals", checkAuth, AppealController.getAll);
 
 app.get("/applications", checkAuth, ApplicationController.getAll);
+app.get("/application/options", checkAuth, ApplicationController.getOptions);
+
 app.post(
-  "/applications",
+  "/application",
   checkAuth,
   handleValidationErrors,
   ApplicationController.create
