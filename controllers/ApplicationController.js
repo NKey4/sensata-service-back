@@ -19,15 +19,15 @@ const create = async (req, res) => {
     } else {
       seqId = counter.seq;
     }
-
+    console.log(req.body);
     const doc = new ApplicationModel({
       id: seqId,
       user: req.userId,
-      requestLocationId: req.body.location,
-      requestCategoryId: req.body.workType,
+      requestLocationId: req.body.locationId,
+      requestCategoryId: req.body.workTypeId,
       requestSubCategoryId: req.body.reason,
       status_id: "660087e06c58241f9b026704",
-      address: req.body.address_id,
+      address: req.body.addressId,
       dataMessage: req.body.dataMessage,
       userMessage: req.body.description,
     });
@@ -44,14 +44,14 @@ const create = async (req, res) => {
 
 const getOptions = async (req, res) => {
   try {
-    const categories = CategoryModel.find();
-    const locations = LocationModel.find();
+    const categories = await CategoryModel.find();
+    const locations = await LocationModel.find();
 
     res.json({ categories, locations });
   } catch (error) {
     console.log(error);
     res.status(500).json({
-      message: "Ошибка в получении всех активностей",
+      message: "Ошибка в получении всех опций",
     });
   }
 };
@@ -66,7 +66,7 @@ const getAll = async (req, res) => {
       .populate("status_id")
       .populate("address")
       .exec();
-    console.log(applications);
+
     res.json(applications);
   } catch (error) {
     console.log(error);
