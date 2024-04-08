@@ -3,8 +3,13 @@ import UserModel from "../models/User.js";
 
 const addAddress = async (req, res) => {
   try {
-    const { street, city } = req.body;
-    const newAddress = new AddressModel({ street, city, user: req.userId });
+    const { street, city, flat } = req.body;
+    const newAddress = new AddressModel({
+      street,
+      city,
+      flat,
+      user: req.userId,
+    });
     await newAddress.save();
 
     await UserModel.findByIdAndUpdate(req.userId, {
