@@ -15,6 +15,7 @@ const addAddress = async (req, res) => {
     await UserModel.findByIdAndUpdate(req.userId, {
       $push: { addresses: newAddress._id },
     });
+    console.log(newAddress);
     res.json(newAddress);
   } catch (err) {
     console.log(err);
@@ -26,7 +27,9 @@ const addAddress = async (req, res) => {
 
 const getAll = async (req, res) => {
   try {
-    const addresses = await AddressModel.find({ user: req.userId });
+    const addresses = await AddressModel.find({ user: req.userId }).populate(
+      "status_id"
+    );
     res.json(addresses);
   } catch (error) {
     console.log(error);
