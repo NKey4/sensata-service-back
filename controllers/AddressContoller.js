@@ -27,9 +27,7 @@ const addAddress = async (req, res) => {
 
 const getAll = async (req, res) => {
   try {
-    const addresses = await AddressModel.find({ user: req.userId }).populate(
-      "status_id"
-    );
+    const addresses = await AddressModel.find({ user: req.userId });
     res.json(addresses);
   } catch (error) {
     console.log(error);
