@@ -49,6 +49,7 @@ app.post("/alice/confirmCode", UserController.confirmAliceCode);
 app.post("/add-address", checkAuth, AddressControler.addAddress);
 app.get("/addresses", checkAuth, AddressControler.getAll);
 app.get("/appeals", checkAuth, AppealController.getAll);
+app.post("/appeal", checkAuth, AppealController.create);
 
 app.get("/applications", checkAuth, ApplicationController.getAll);
 app.get("/application/options", checkAuth, ApplicationController.getOptions);
